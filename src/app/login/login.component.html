@@ -1,25 +1,34 @@
-<div class="d-flex justify-content-center align-items-center container ">
+<form class="form" [formGroup]="loginForm" (ngSubmit)="onSave(loginForm.value)">
+ 
+    <div class="form-group" >
+        <input class="form-control" type="text" name="user" [formControl]="loginForm.controls.user">
+      </div>
+      <div *ngIf="loginForm.controls['user'].errors?.required &&
+      (loginForm.controls['user'].touched ||
+      loginForm.controls['user'].dirty)" class="alert alert-danger">
+    This field is required
+    </div>
 
-    <div class="row ">
+    <div *ngIf="loginForm.controls['user'].errors?.pattern &&
+    (loginForm.controls['user'].touched ||
+    loginForm.controls['user'].dirty)" class="alert alert-danger">
+  Invalid Email
+  </div>
 
-<form action="" >
-     
-    <div class="form-group">
-      <label for="email">Email address:</label>
-      <input type="email" class="form-control" id="email">
-   </div>  
+
   <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
+    <input class="form-control" type="password" name="password" [formControl]="loginForm.controls.password">
   </div>
-  <div class="form-group form-check">
-    <label class="form-check-label">
-      <input class="form-check-input" type="checkbox"> Remember me
-    </label>
+
+  <div *ngIf="loginForm.controls['password'].errors?.required &&
+    (loginForm.controls['password'].touched ||
+    loginForm.controls['password'].dirty)"  class="alert alert-warning">
+    This field is required  
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    
+
+  <div class="form-group">
+    <button class="btn btn-success" type="submit">Login</button>
+  </div>
 
 </form>
-</div>
-</div>
-
